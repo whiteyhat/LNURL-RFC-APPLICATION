@@ -6,6 +6,8 @@ const bech32 = require('bech32')
 const crypto = require('crypto')
 const Logger = use('Logger')
 const getWalletInfo = require('ln-service/getWalletInfo')
+const User  = use('App/Models/User')
+const Hash = use('Hash')
 
 
 const NonceHashMap = {}
@@ -14,9 +16,30 @@ const k1HashMap = {}
 // see https://github.com/btcontract/lnurl-rfc/blob/master/spec.md
 class LnurlController {
 
-    // route: /withdraw/
-async requestWithdrawal ({auth, response}) {
+async createUser({auth, response, request}) {
+    
     try {
+        await auth.check()
+        Logger.info('Nice')
+    } catch (err){
+        const {username} = request.all()
+        const existingUser = await User.findBy('username', username)
+        if (!existingUser) {
+            const newuser = await new User()
+            newuser.username = username
+            await newuser.save()
+            await auth.login(newuser)
+        } else {
+            await auth.login(existingUser)
+        }
+        Logger.error('Not Nice')
+    }
+}
+
+    // route: /withdraw/request
+async requestWithdrawal ({auth, response, request}) {
+    try{
+
             // create random nonce for the user
             const nonce = Math.floor(Math.random() * 1000000) // TODO: stronger source of randomness
             // const nonce = crypto.randomBytes()
@@ -25,7 +48,7 @@ async requestWithdrawal ({auth, response}) {
             NonceHashMap[Hash.make(nonce)] = auth.user.id 
                 
             return response.json({
-                data: bech32.encode('LNURL', 'https://satoshis.games/withdraw/confirmation?q='+nonce.toUpperCase())
+                data: bech32.encode('LNURL', 'https://localhost:3322/withdraw/confirmation?q='+nonce)
             })
     }catch(error){
         Logger.error(error)
