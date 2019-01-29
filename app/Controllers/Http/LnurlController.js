@@ -47,8 +47,12 @@ async requestWithdrawal ({auth, response, request}) {
             // add item to hashmap
             NonceHashMap[Hash.make(nonce)] = auth.user.id 
                 
+            // let words = bech32.toWords(Buffer.from('https://localhost:3322/withdraw/confirmation?q='+String.valueOf(nonce), 'utf8'))
+            let words = bech32.toWords(Buffer.from('https://lnurl.satoshis.games/conf?q='+String(nonce), 'utf8'))
+
+           
             return response.json({
-                data: bech32.encode('LNURL', 'https://localhost:3322/withdraw/confirmation?q='+nonce)
+                data: bech32.encode('lnurl', words)
             })
     }catch(error){
         Logger.error(error)
