@@ -1,31 +1,32 @@
-# Adonis fullstack application
+# LNURL-RFC APPLICATION
 
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
-
-1. Bodyparser
-2. Session
-3. Authentication
-4. Web security middleware
-5. CORS
-6. Edge template engine
-7. Lucid ORM
-8. Migrations and seeds
+Bech32-encoded HTTPS query string standard to help payer interact with payee in Lightning Neetwork. This standard simplify a number of standard scenarios such as requesting incoming channels, withdrawing funds, doing atomic swaps and more.
 
 ## Setup
 
-Use the adonis command to install the blueprint
+`npm i`
+`npm start`
 
-```bash
-adonis new yardstick
+### Requirements
+`npm i -g @adonisjs/cli`
+
+Create `.env` file in root folder and change values for your env (DB_*)
 ```
-
-or manually clone the repo and then run `npm install`.
-
-
-### Migrations
-
-Run the following command to run startup migrations.
-
-```js
-adonis migration:run
+HOST=127.0.0.1
+PORT=3322
+NODE_ENV=development
+APP_URL=http://${HOST}:${PORT}
+CACHE_VIEWS=false
+APP_KEY=ZXQzCG3gW03Byu2rWYgZuywFakBwmS1G
+DB_CONNECTION=sqlite
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=
+DB_PASSWORD=
+DB_DATABASE=
+SESSION_DRIVER=cookie
+HASH_DRIVER=bcrypt
+LND_MACAROON=
+LND_HOST=
+LND_PORT=
 ```
