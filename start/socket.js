@@ -42,14 +42,14 @@ const initWS = async () => {
               Logger.notice('Invoice created')
           }
       })
-  } catch (error) {
-      Logger.error(error)
-  }
+} catch (err){
+    Logger.error(err)
 }
 
 // Since BTCPay Server closes WS every 90 seconds it must be looped recursively
 try {
-  initWS()
-} catch (error) {
-  Logger.error(error)
+    initWS()
+    } catch (error) {
+    Logger.error(error)
+    }
 }
