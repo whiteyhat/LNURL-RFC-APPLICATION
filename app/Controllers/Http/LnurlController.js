@@ -16,11 +16,11 @@ const k1HashMap = {}
 // see https://github.com/btcontract/lnurl-rfc/blob/master/spec.md
 class LnurlController {
 
-async createUser({auth, response, request}) {
+async createUser({auth, request, view}) {
     
     try {
         await auth.check()
-        Logger.info('Nice')
+        return view.render('welcome')
     } catch (err){
         const {username} = request.all()
         const existingUser = await User.findBy('username', username)
@@ -29,10 +29,11 @@ async createUser({auth, response, request}) {
             newuser.username = username
             await newuser.save()
             await auth.login(newuser)
+            return view.render('welcome')
         } else {
             await auth.login(existingUser)
+            return view.render('welcome')
         }
-        Logger.error('Not Nice')
     }
 }
 
