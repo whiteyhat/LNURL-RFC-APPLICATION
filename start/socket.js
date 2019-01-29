@@ -1,7 +1,9 @@
 'use strict'
-
+const LndService = use('App/Services/LndService')
 const Ws = use('Ws')
 const Logger = use('Logger')
+const lnService = require('ln-service')
+
 
 let websocket = null
 Ws.channel('invoice', 'WsInvoiceController')
