@@ -33,7 +33,7 @@
           @if(!auth.user.username)
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#withdrawalModal">Start</button></a>
           @else
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#withdrawalModal">Withdraw</button></a>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#withdrawalModal">Withdraw</button></a>
         @endif
       </div>
     </div>
@@ -46,8 +46,8 @@
            payments as belonging to a single payer without compromising payer's identity. Related lnurl 
            must be embedded in a Lightning invoice.</p>
       </div>
-      <div class="card-footer">
-          <button type="button" class="btn btn-primary">Click me</button>
+      <div hidden class="card-footer">
+          <button type="button" class="btn btn-primary">Start</button>
       </div>
     </div>
     <div class="card">
@@ -57,8 +57,8 @@
         <p class="card-text">LNURL-RFC can also be used to login user to a service or authorise sensitive actions 
           (such as withdrawal) by signing a challenge.</p>
       </div>
-      <div class="card-footer">
-          <button type="button" class="btn btn-primary">Click me</button>
+      <div hidden class="card-footer">
+          <button type="button" class="btn btn-primary">Start</button>
       </div>
     </div>
   </div>
