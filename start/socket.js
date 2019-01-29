@@ -1,6 +1,7 @@
 'use strict'
 
 const Ws = use('Ws')
+const Logger = use('Logger')
 
 let websocket = null
 Ws.channel('invoice', 'WsInvoiceController')
