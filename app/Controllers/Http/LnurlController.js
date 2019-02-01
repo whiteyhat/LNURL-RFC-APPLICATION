@@ -42,8 +42,8 @@ async requestWithdrawal ({auth, response, request}) {
     try{
 
             // create random nonce for the user
-            //const nonce = String(Math.floor(Math.random() * 1000000)) // TODO: stronger source of randomness
-            const nonce = String(crypto.randomBytes(100))
+            const nonce = String(Math.floor(Math.random() * 1000000)) // TODO: stronger source of randomness
+            // const nonce = String(crypto.randomBytes(100))
             Logger.info(nonce)
 
             // add item to hashmap
