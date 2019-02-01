@@ -42,14 +42,14 @@ async requestWithdrawal ({auth, response, request}) {
     try{
 
             // create random nonce for the user
-            const nonce = Math.floor(Math.random() * 1000000) // TODO: stronger source of randomness
+            const nonce = String(Math.floor(Math.random() * 1000000)) // TODO: stronger source of randomness
             // const nonce = crypto.randomBytes()
 
             // add item to hashmap
             NonceHashMap[Hash.make(nonce)] = auth.user.id 
                 
             // let words = bech32.toWords(Buffer.from('https://localhost:3322/withdraw/confirmation?q='+String.valueOf(nonce), 'utf8'))
-            let words = bech32.toWords(Buffer.from('https://lnurl.satoshis.games/conf?q='+String(nonce), 'utf8'))
+            let words = bech32.toWords(Buffer.from('https://lnurl.satoshis.games/conf?q='+nonce, 'utf8'))
 
            
             return response.json({
