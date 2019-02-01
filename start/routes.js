@@ -6,7 +6,7 @@ Route.on('/').render('welcome')
 
 Route.get('signup', 'LnurlController.createUser')
 Route.get('/withdraw/request', 'LnurlController.requestWithdrawal')
-Route.get('confirmation', 'LnurlController.confirmWithdrawal')
+Route.get('conf', 'LnurlController.confirmWithdrawal')
 
 // Withdrawal routes group
 Route.group(() => {
