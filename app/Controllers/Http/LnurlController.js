@@ -73,7 +73,7 @@ async confirmWithdrawal ({response, request}) {
 
             delete NonceHashMap[Hash.make(q)]; // Invalidate a QR
 
-            const secondLevelNonce = Math.floor(Math.random() * 1000000) // TODO: stronger source of randomness
+            const secondLevelNonce = String(Math.floor(Math.random() * 1000000)) // TODO: stronger source of randomness
 
             k1HashMap[Hash.make(secondLevelNonce)] = existingUserId
 
