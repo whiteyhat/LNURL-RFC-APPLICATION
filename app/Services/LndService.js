@@ -26,11 +26,7 @@ class LndService {
     try {
         const lnd = await getLndInstance()
         // Returns the logged in user instance
-        const user = await auth.getUser()
         const decodedPayReq = await decodePaymentRequest({ lnd, request: pr })
-        if (decodedPayReq.tokens > user.balance) {
-            return response.message({ error: "Not enough found" })
-        }
         if (decodedPayReq.is_expired) {
             return response.message({ error: "Invoice is expired" })
         }
