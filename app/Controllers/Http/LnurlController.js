@@ -1,11 +1,8 @@
 'use strict'
-const createInvoice = require('ln-service/createInvoice')
-const decodePaymentRequest = require('ln-service/decodePaymentRequest')   
-const LndService = use('App/Services/LndService')
 const bech32 = require('bech32')
 const crypto = require('crypto')
+const LightningService = use('App/Services/LndService')
 const Logger = use('Logger')
-const getWalletInfo = require('ln-service/getWalletInfo')
 const User  = use('App/Models/User')
 const Hash = use('Hash')
 
@@ -102,30 +99,12 @@ async executeWithrawal ({request}) {
             const existingUserId = k1HashMap[Hash.make(k1)]
 
             delete k1HashMap[Hash.make(k1)];
-            this.makePayment({pr})
+
+            LightningService.payment(pr)
 
             response.ok()
         } else {
         return json({ status: "ERROR", reason: "Second level nonce not found" })
-        }
-    }
- 
-    async makePayment ({pr, response, auth}) {
-        try {
-            const lnd = await LndService.getLndInstance()
-            // Returns the logged in user instance
-            const user = await auth.getUser()
-            const decodedPayReq = await decodePaymentRequest({ lnd, request: pr })
-            if (decodedPayReq.tokens > user.balance) {
-                return response.message({ error: "Not enough found" })
-            }
-            if (decodedPayReq.is_expired) {
-                return response.message({ error: "Invoice is expired" })
-            }
-            const invoicePaid = await payInvoice({ lnd, request: pr });
-
-        }catch(error){
-            Logger.error(error)
         }
     }
 }
