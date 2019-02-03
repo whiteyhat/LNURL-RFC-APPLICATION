@@ -78,7 +78,7 @@ async confirmWithdrawal ({response, request}) {
             return response.json({
                 callback: "https://satoshis.games/withdrawal/execute",
                 k1: secondLevelNonce,
-                maxWithdrawable: 2000, // msat
+                maxWithdrawable: 5000, // millisatoshis
                 defaultDescription: "withdraw from satoshis.games",
                 tag: "withdrawRequest",
             })
